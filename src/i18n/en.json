@@ -1,0 +1,27 @@
+{
+  "title": "Welcome to the WEATHER FORECAST",
+  "description": "As a leading weather forecast provider, we offer the most accurate and reliable solutions for your business needs. Get exactly what you need – a turnkey service suite, a powerful weather analysis engine, fast API integration, or custom solutions tailored to your project.",
+  "login": {
+    "title": "Welcome",
+    "placeholders": {
+      "username": "Username",
+      "phone_number": "Phone number"
+    },
+    "errors": {
+      "username": "Username should contain only letters.",
+      "phone_number": "Invalid phone number.",
+      "response": "Username or phone are incorrect"
+    }
+  },
+  "forgot": "Forgot password?",
+  "checkbox": "Remember me",
+  "buttons": {
+    "login": "Login"
+  },
+  "weather_page": {
+    "placeholders": {
+      "select_city": "Select city"
+    }
+  },
+  "switchLang": "Switch lang"
+}

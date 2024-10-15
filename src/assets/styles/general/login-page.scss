@@ -1,0 +1,107 @@
+.container {
+  .switch-lang {
+    display: inline-block;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: #ffffff;
+    font-weight: 600;
+    background: #4444FF;
+    font-size: 16px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-top: 5px;
+  }
+
+  .modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: white;
+
+    .form {
+      background-color: #15172b;
+      border-radius: 20px;
+      box-sizing: border-box;
+      height: 400px;
+      padding: 20px;
+      width: 320px;
+
+      &__title {
+        color: #eee;
+        font-family: sans-serif;
+        font-size: 36px;
+        font-weight: 600;
+        margin: 30px 0 20px;
+        text-align: center;
+      }
+
+      &__input-container {
+        height: 50px;
+        width: 100%;
+        margin-bottom: 38px;
+      }
+
+      &__input {
+        background-color: #303245;
+        border-radius: 12px;
+        border: 0;
+        box-sizing: border-box;
+        color: #eee;
+        font-size: 18px;
+        height: 80%;
+        outline: 0;
+        padding: 4px 20px 0;
+        width: 100%;
+      }
+
+      &__label {
+        display: block;
+        color: #65657b;
+        font-family: sans-serif;
+        margin-bottom: 6px;
+      }
+
+      &__button {
+        background-color: #08d;
+        border-radius: 12px;
+        border: 0;
+        box-sizing: border-box;
+        color: #eee;
+        cursor: pointer;
+        font-size: 18px;
+        height: 50px;
+        outline: 0;
+        text-align: center;
+        width: 100%;
+        margin-top: 13px;
+
+        &:active {
+          background-color: #06b;
+        }
+      }
+
+      &__error {
+        margin-top: 4px;
+        font-size: 12px;
+        display: block;
+        color: red;
+        text-align: left;
+
+        @media (max-width: 768px) {
+          margin-top: 4px;
+          font-size: 10px;
+        }
+      }
+
+      &__authorization-error {
+        font-size: 14px;
+        display: block;
+        color: red;
+        text-align: center;
+        margin-top: 12px;
+      }
+    }
+  }
+}

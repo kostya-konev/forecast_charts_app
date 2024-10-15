@@ -1,0 +1,30 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.05em;
+  width: 100vw;
+  height: 100vh;
+}
+
+#root {
+  background-color: #131415;
+  width: 100vw;
+  height: 100vh;
+}
+
+.container {
+  @media (min-width: 360px) {
+    padding: 5px;
+    //font-size: 12px;
+    //font-weight: bold;
+  }
+
+  @media (min-width: 768px) {
+    padding: 20px;
+    //width: 720px;
+  }
+
+  @media (min-width: 1200px) {
+    padding: 30px;
+    //width: 1180px;
+  }
+}
