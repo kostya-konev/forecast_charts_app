@@ -7,7 +7,7 @@
           alt="Logo"
           class="logo"
         >
-        <button class="switch-lang" @click="mainStore.switchLang(locale)">
+        <button class="switch-lang" @click="mainStore.switchLang()">
           {{$t('switchLang')}}
         </button>
       </RouterLink>

@@ -9,12 +9,11 @@
         :cityWeatherData="cityWeatherData"
         @setCurrentCity="setCurrentCity"
         @openConfirmationModal="openConfirmationModal"
-        @setCityToBeDeleted="setCityToBeDeleted"
       />
     </div>
     <TemperatureChart v-if="currentCity" :currentCity="currentCity" />
     <WarningModal
-      v-if="isModalVisible"
+      v-if="isModalVisible && cityToBeDeleted"
       :cityToBeDeleted="cityToBeDeleted"
       @cancelDelete="isModalVisible = false"
       @confirmDelete="deleteCity"
@@ -33,31 +32,28 @@ import InputWithAutocomplete from '@/components/controls/InputWithAutocomplete.v
 import WeatherCityCard from '@/components/cards/WeatherCityCard.vue';
 import TemperatureChart from '@/components/charts/TemperatureChart.vue';
 import WarningModal from "@/components/modals/WarningModal.vue";
+import type {IWeatherResponse} from "@/models";
 
 const weatherStore = useWeatherStore();
 
-const currentCity = ref(null);
+const currentCity = ref<IWeatherResponse | null>(null);
 const isModalVisible = ref(false);
-const cityToBeDeleted = ref({});
+const cityToBeDeleted = ref<IWeatherResponse | null>(null);
 
-const setCurrentCity = (city) => {
+const setCurrentCity = (city: IWeatherResponse) => {
   currentCity.value = city;
 };
 
-const addCity = (city) => {
-  weatherStore.fetchWeatherData(city)
+const addCity = (cityName: string) => {
+  weatherStore.fetchWeatherData(cityName)
 }
 
-const openConfirmationModal = (city) => {
+const openConfirmationModal = (city: IWeatherResponse) => {
   isModalVisible.value = true;
   cityToBeDeleted.value = city;
 }
 
-const setCityToBeDeleted = (city) => {
-  cityToBeDeleted.value = city;
-}
-
-const deleteCity = (cityId) => {
+const deleteCity = (cityId: number) => {
   weatherStore.deleteCity(cityId);
   isModalVisible.value = false;
   currentCity.value = null;

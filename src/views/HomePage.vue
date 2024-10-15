@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <button class="switch-lang" @click="mainStore.switchLang(locale)">
+    <button class="switch-lang" @click="mainStore.switchLang()">
       {{$t('switchLang')}}
     </button>
     <div class="description-container">

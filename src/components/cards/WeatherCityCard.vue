@@ -22,12 +22,13 @@
 
 <script setup lang="ts">
 import {defineEmits, defineProps} from 'vue';
+import type {IWeatherResponse} from "@/models";
 
 const props = defineProps<{
-  cityWeatherData: {};
+  cityWeatherData: IWeatherResponse;
 }>();
 
-const emit = defineEmits(['setCurrentCity, openConfirmationModal']);
+const emit = defineEmits(['setCurrentCity', 'openConfirmationModal']);
 
 const showChart = () => {
   emit('setCurrentCity', props.cityWeatherData)

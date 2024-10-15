@@ -26,11 +26,11 @@
 <script setup lang="ts">
 defineProps({
   width: {
-    type: Number,
+    type: String,
     required: true
   },
   height: {
-    type: Number,
+    type: String,
     required: true
   }
 });

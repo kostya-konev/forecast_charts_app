@@ -10,7 +10,12 @@
       class="form__input"
     />
     <ul v-if="showSuggestions && cities.length && !isPreloaderShown" class="form__cities">
-      <li v-for="(city, index) of cities" :key="index" @click="selectCity(city)" class="form__selectedCity">
+      <li
+        v-for="(city, index) of cities"
+        :key="index"
+        class="form__selectedCity"
+        @click="selectCity(city)"
+      >
         {{ city.name }} ({{ city.country }})
       </li>
     </ul>
@@ -24,14 +29,19 @@ import axios from 'axios';
 import {debounce} from "lodash";
 import Preloader from "@/components/loaders/Preloader.vue";
 
+interface City {
+  name: string;
+  country: string;
+}
+
 const API_KEY = import.meta.env.VITE_OPENWEATHERMAP_KEY;
 
 const emit = defineEmits(['addCity'])
 
 const query = ref('');
-const selectedCity = ref(null);
+const selectedCity = ref<City | null>(null);
 const showSuggestions = ref(false);
-const cities = ref([]);
+const cities = ref<City[]>([]);
 const isPreloaderShown = ref(false);
 
 const fetchCities = async () => {
@@ -46,7 +56,7 @@ const fetchCitiesDebounced = debounce(async () => {
       if (data) {
         showSuggestions.value = true;
         isPreloaderShown.value = false;
-        cities.value = data.list.map(city => ({
+        cities.value = data.list.map((city: any) => ({
           name: city.name,
           country: city.sys.country,
         }));
@@ -57,8 +67,9 @@ const fetchCitiesDebounced = debounce(async () => {
   }
 }, 500);
 
-const selectCity = (city) => {
-  selectedCity.value = {};
+const selectCity = (city: City) => {
+  console.log(city);
+  selectedCity.value = null;
   query.value = "";
   showSuggestions.value = false;
   emit('addCity', city.name);
@@ -68,7 +79,7 @@ const selectCity = (city) => {
 const hideSuggestions = () => {
   setTimeout(() => {
     showSuggestions.value = false;
-  }, 100);
+  }, 2000);
 };
 </script>
 

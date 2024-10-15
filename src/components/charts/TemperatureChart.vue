@@ -11,30 +11,31 @@
 import { ref, watch, onMounted } from 'vue';
 import { Chart } from 'chart.js/auto';
 import axios from 'axios';
+import type {IWeatherResponse} from "@/models";
 
 const props = defineProps<{
-  currentCity: {}
+  currentCity: IWeatherResponse
 }>();
 
 const chartRef = ref<Chart | null>(null);
 const mode = ref<'daily' | '5day'>('daily');
 const weatherData = ref<any[]>([]);
-const city = props.currentCity.name;
 
 const setMode = (newMode: 'daily' | '5day') => {
   mode.value = newMode;
+  fetchWeatherData(props.currentCity.name);
 };
 
-const fetchWeatherData = async () => {
+const fetchWeatherData = async (cityName: string) => {
   const apiKey = import.meta.env.VITE_OPENWEATHERMAP_KEY;
-  let url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${apiKey}`;
+  let url = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=metric&appid=${apiKey}`;
 
   const { data } = await axios.get(url);
 
   if (mode.value === 'daily') {
     weatherData.value = data.list.slice(0, 8);
   } else {
-    weatherData.value = data.list.filter((el, id) => id % 8 === 0);
+    weatherData.value = data.list.filter((el: any, id: number) => id % 8 === 0);
   }
 
   renderChart();
@@ -83,9 +84,17 @@ const renderChart = () => {
   });
 };
 
-watch(mode, fetchWeatherData);
+watch(() => props.currentCity, (newCity) => {
+  if (newCity) {
+    fetchWeatherData(newCity.name);
+  }
+});
 
-onMounted(fetchWeatherData);
+onMounted(() => {
+  if (props.currentCity) {
+    fetchWeatherData(props.currentCity.name)
+  }
+});
 </script>
 
 <style scoped>

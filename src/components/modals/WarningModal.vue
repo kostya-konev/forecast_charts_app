@@ -15,9 +15,10 @@
 
 <script setup lang="ts">
 import {defineEmits, defineProps} from 'vue';
+import type {IWeatherResponse} from "@/models";
 
 const props = defineProps<{
-  cityToBeDeleted: {};
+  cityToBeDeleted: IWeatherResponse | null;
 }>();
 
 const emit = defineEmits(['cancelDelete', 'confirmDelete']);
@@ -27,7 +28,9 @@ const handleCancel = () => {
 };
 
 const handleConfirm = () => {
-  emit('confirmDelete', props.cityToBeDeleted.id);
+  if (props.cityToBeDeleted) {
+    emit('confirmDelete', props.cityToBeDeleted.id);
+  }
 };
 </script>
 

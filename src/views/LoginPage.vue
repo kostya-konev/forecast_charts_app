@@ -66,7 +66,7 @@ const login = async (): Promise<void> => {
   if (usernameError.value || phoneNumberError.value) {
     return;
   }
-  const data: IUser[] = await fetchUsers();
+  const data: IUser[] = (await fetchUsers()) || [];
   const userExists = data.some(
     (user) => user.username === username.value && user.phone === phoneNumber.value
   );
@@ -77,8 +77,10 @@ const login = async (): Promise<void> => {
     const currentUser: IUser | undefined = data.find(
       (user) => user.username === username.value && user.phone === phoneNumber.value
     );
-    Cookies.set('authorizationToken', Math.random(), { expires: 7 });
-    await router.push({ path: '/weather', query: { user: currentUser.id } });
+    Cookies.set('authorizationToken', Math.random().toString(), { expires: 7 });
+    if (currentUser) {
+      await router.push({ path: '/weather', query: { user: currentUser.id } });
+    }
   }
 }
 </script>
