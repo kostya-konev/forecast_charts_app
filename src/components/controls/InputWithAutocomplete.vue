@@ -52,7 +52,7 @@ const fetchCities = async () => {
 const fetchCitiesDebounced = debounce(async () => {
   if (query.value) {
     try {
-      const { data } = await axios.get(`http://api.openweathermap.org/data/2.5/find?q=${query.value}&limit=3&appid=${API_KEY}`);
+      const { data } = await axios.get(`https://api.openweathermap.org/data/2.5/find?q=${query.value}&limit=3&appid=${API_KEY}`);
       if (data) {
         showSuggestions.value = true;
         isPreloaderShown.value = false;
