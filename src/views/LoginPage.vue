@@ -79,7 +79,7 @@ const login = async (): Promise<void> => {
     );
     Cookies.set('authorizationToken', Math.random().toString(), { expires: 7 });
     if (currentUser) {
-      await router.push({ path: '/weather', query: { user: currentUser.id } });
+      await router.push({ path: '/weather' });
     }
   }
 }
